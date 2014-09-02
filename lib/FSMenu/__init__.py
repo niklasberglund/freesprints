@@ -226,8 +226,7 @@ class MenuItem(object):
         print "self.font:"
         print self.font
         
-        if dict.has_key("callback"):
-            self.callback = dict['callback']
+        self.callback = dict.get("callback")
         
         if dict.has_key("submenu"):
             self.submenu = MenuItem.itemsListFromDict(dict['submenu'], menuOptions, self)
