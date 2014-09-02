@@ -76,7 +76,7 @@ class Application(object):
             }
         ]
         self.windowSurface = pygame.display.set_mode((500, 400), 0, 32)
-        self.menu = FSMenu.Menu(self.windowSurface, menuStructure)
+        self.menu = FSMenu.Menu(self.windowSurface, menuStructure, menuOptions)
         
     def start(self):
         print "asd"
