@@ -28,7 +28,7 @@ class Application(object):
         print "Application.__init__"
         
         menuOptions = {
-            "font_path": "",
+            "font_path": "fonts/Cave-Story.ttf",
             "font_size": 42,
             "color_background": (0, 0, 0),
             "color_text": (255, 255, 255),
