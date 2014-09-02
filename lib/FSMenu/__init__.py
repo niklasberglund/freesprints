@@ -120,41 +120,39 @@ class Menu:
         
         i = 0
         for menuItem in self.currentItems:
-            print "render font"
-            print "i: " + str(i)
             print "currentIndex: " + str(self.currentIndex)
-            
-            if (i == self.currentIndex):
-                #textColor = self.colorRed
-                text = menuItem.getHighlightedText()
-            else:
-                #textColor = self.colorWhite
-                text = menuItem.getText()
-                
-            textRect = text.get_rect()
-            
-            #text = self.font.render(menuItem.title, True, textColor, self.colorBlue)
-            #textRect = text.get_rect()
-            
-            height = textRect.height
-            menuStartY = self.displaySurface.get_rect().centery - ((len(self.currentItems)*height)/2)
-            y = menuStartY + (i*height)
-            
-            textRect.centerx = self.displaySurface.get_rect().centerx
-            textRect.y = y
-            
-            print height
-            
-            #pygame.draw.rect(self.displaySurface, self.colorRed, (textRect.left - 20, textRect.top - 20, textRect.width + 40, textRect.height + 40))
-            self.displaySurface.blit(text, textRect)
-            print self.displaySurface
+            self.renderItemAtIndex(i)
             pygame.display.update()
             i = i+1
             
             elapsed_time = timeit.default_timer() - start_time
         
         print "\033[91mMenu.render time: " + str(elapsed_time) + "\033[0m"
+    
+    def renderItemAtIndex(self, index):
+        item = self.currentItems[index]
+        
+        if (index == self.currentIndex):
+            #textColor = self.colorRed
+            text = item.getHighlightedText()
+        else:
+            #textColor = self.colorWhite
+            text = item.getText()
             
+        textRect = text.get_rect()
+        height = textRect.height
+        
+        menuStartY = self.displaySurface.get_rect().centery - ((len(self.currentItems)*height)/2)
+        y = menuStartY + (index*height)
+        
+        textRect.centerx = self.displaySurface.get_rect().centerx
+        textRect.y = y
+        
+        print height
+        
+        #pygame.draw.rect(self.displaySurface, self.colorRed, (textRect.left - 20, textRect.top - 20, textRect.width + 40, textRect.height + 40))
+        self.displaySurface.blit(text, textRect)
+        
     def clear(self):
         self.displaySurface.fill(self.colorBlack)
         
