@@ -122,10 +122,10 @@ class Menu:
         for menuItem in self.currentItems:
             print "currentIndex: " + str(self.currentIndex)
             self.renderItemAtIndex(i)
-            pygame.display.update()
             i = i+1
-            
-            elapsed_time = timeit.default_timer() - start_time
+        
+        pygame.display.update()    
+        elapsed_time = timeit.default_timer() - start_time
         
         print "\033[91mMenu.render time: " + str(elapsed_time) + "\033[0m"
     
