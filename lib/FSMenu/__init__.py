@@ -91,10 +91,12 @@ class Menu:
             sys.exit()
         elif key == K_UP:
             print "UP"
+            self.clearIndex = self.currentIndex
             self.moveUp()
             self.render()
         elif key == K_DOWN:
             print "DOWN"
+            self.clearIndex = self.currentIndex
             self.moveDown()
             self.render()
         elif key == K_RETURN:
@@ -116,6 +118,22 @@ class Menu:
     def render(self):
         start_time = timeit.default_timer()
         
+        if self.clearIndex == None:
+            self.renderFull()
+        else:
+            print "PARTIAL RENDER"
+            self.renderItemAtIndex(self.clearIndex)
+            self.renderItemAtIndex(self.currentIndex)
+            self.clearIndex = None
+            
+        pygame.display.update()
+            
+        elapsed_time = timeit.default_timer() - start_time
+        print "\033[91mMenu.render time: " + str(elapsed_time) + "\033[0m"
+    
+    def renderFull(self):
+        #start_time = timeit.default_timer()
+        
         print "Menu.render"
         
         i = 0
@@ -124,10 +142,20 @@ class Menu:
             self.renderItemAtIndex(i)
             i = i+1
         
-        pygame.display.update()    
-        elapsed_time = timeit.default_timer() - start_time
+        #elapsed_time = timeit.default_timer() - start_time
+        #print "\033[91mMenu.renderFull time: " + str(elapsed_time) + "\033[0m"
         
-        print "\033[91mMenu.render time: " + str(elapsed_time) + "\033[0m"
+    def renderChange(self):
+        start_time = timeit.default_timer()
+        if self.clearIndex == None:
+            self.renderFull()
+        else:
+            self.renderItemAtIndex(self.clearIndex)
+            self.renderItemAtIndex(self.currentIndex)
+            self.clearIndex = None
+        
+        elapsed_time = timeit.default_timer() - start_time
+        print "\033[91mMenu.renderChange time: " + str(elapsed_time) + "\033[0m"
     
     def renderItemAtIndex(self, index):
         item = self.currentItems[index]
