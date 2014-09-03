@@ -10,6 +10,9 @@ class Menu:
     menuPosition = []
     displaySurface = None
     
+    # optimization
+    clearIndex = None
+    
     # Display
     font = None
     color = None # TODO
@@ -23,35 +26,13 @@ class Menu:
     
     def __init__(self, displaySurface, menuStructure, menuOptions = None):
         self.displaySurface = displaySurface
-        print "MENUOPTIONS:::"
-        print menuOptions
         
-        font_name = None
-        font_path = None
-        font_size = 40
+        if menuOptions == None:
+            menuOptions = Options() # with default values
         
-        pygame.font.init()
-        
-        if menuOptions != None:
-            if menuOptions.has_key("font_size"):
-                font_size = menuOptions["font_size"]
-                
-            if menuOptions.has_key("font_name"):
-                font_name = menuOptions["font_name"]
-                self.font = pygame.font.SysFont(font_path, font_size)
-                
-            if menuOptions.has_key("font_path"):
-                font_path = menuOptions["font_path"]
-                self.font = pygame.font.Font(font_path, font_size)
-                
-                
-                
-        pygame.font.init()
-        font_path = "./fonts/Cave-Story.ttf"
-        self.font = pygame.font.Font(font_path, 48)
+        self.font = menuOptions.getItemFont()
         
         # populate with MenuItem objects
-        #self.currentItems = MenuItem.itemsListFromDict(menuStructure)
         self.items = MenuItem.itemsListFromDict(menuStructure, menuOptions)
         self.currentItems = self.items
         
@@ -70,22 +51,14 @@ class Menu:
         print "registered key " + str(key)
         
         if key == K_ESCAPE: # ESC
-            print "parent menu:"
-            print self.getParentMenu()
             if self.getParentMenu() != None:
-                print "HAVE PARENT"
                 self.currentItems = self.getSiblingsOfItem(self.getParentMenu())
                 self.currentIndex = 0
                 self.clear()
                 self.render()
-                #pygame.quit()
-                #sys.exit()
             else:
-                print "NO PARENT"
                 pygame.quit()
                 sys.exit()
-                #self.currentItems = self.getParentMenu().getSubmenu()
-                #self.render()
         elif key == K_q:
             pygame.quit()
             sys.exit()
@@ -161,10 +134,8 @@ class Menu:
         item = self.currentItems[index]
         
         if (index == self.currentIndex):
-            #textColor = self.colorRed
             text = item.getHighlightedText()
         else:
-            #textColor = self.colorWhite
             text = item.getText()
             
         textRect = text.get_rect()
@@ -230,36 +201,16 @@ class MenuItem(object):
     
     
     def __init__(self, dict, menuOptions, itemParent = None):
-        #self._displaySurface = displaySurface
         print "dict:"
         print dict
         self.title = dict['title']
         self.parent = itemParent
-        
-        print "MenuItem menuOptions:"
-        print menuOptions
-        
-        if menuOptions != None:
-            if menuOptions.has_key("font_size"):
-                font_size = menuOptions["font_size"]
-                
-            if menuOptions.has_key("font_name"):
-                font_name = menuOptions["font_name"]
-                self.font = pygame.font.SysFont(font_path, font_size)
-                
-            if menuOptions.has_key("font_path"):
-                font_path = menuOptions["font_path"]
-                self.font = pygame.font.Font(font_path, font_size)
-                
-        print "self.font:"
-        print self.font
+        self.font = menuOptions.getItemFont()
         
         self.callback = dict.get("callback")
         
         if dict.has_key("submenu"):
             self.submenu = MenuItem.itemsListFromDict(dict['submenu'], menuOptions, self)
-            print "SUBMENU:"
-            print self.submenu
         
     def show(self):
         pass
@@ -301,17 +252,52 @@ class MenuItem(object):
     def itemsListFromDict(dict, menuOptions, itemsParent = None):
         itemsList = []
         
-        print "DICT:"
-        print dict
-        
         for itemDict in dict:
-            print "ITEMDICT:"
-            print itemDict
             itemsList.append(MenuItem(itemDict, menuOptions, itemsParent))
         
         return itemsList
         
 
+class Options:
+    # options
+    font_name = None
+    font_path = None
+    font_size = None
+    color_background = None
+    color_text = None
+    color_text_highlight = None
+    
+    # created
+    itemFont = None
+    valueFont = None
+    
+    def __init__(self, optionsDict):
+        # read options
+        self.font_name = optionsDict.get("font_name")
+        self.font_path = optionsDict.get("font_path")
+        self.font_size = optionsDict.get("font_size")
+        self.color_background = optionsDict.get("color_background")
+        self.color_text = optionsDict.get("color_text")
+        self.color_text_highlight = optionsDict.get("color_text_highlight")
+        
+        # default values
+        if self.font_size == None:
+            self.font_size = 40
+            
+            
+        # create based on specified options
+        if self.font_name != None:
+            self.itemFont = pygame.font.SysFont(self.font_name, self.font_size)
+            
+        if self.font_path != None:
+            self.itemFont = pygame.font.Font(self.font_path, self.font_size)
+        
+    def getItemFont(self):
+        return self.itemFont
+        
+    def getValueFont(self):
+        return self.valueFont
+        
 class MenuFolder(MenuItem):
     def __init__(self, title):
         pass

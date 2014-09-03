@@ -27,7 +27,9 @@ class Application(object):
     def __init__(self):
         print "Application.__init__"
         
-        menuOptions = {
+        pygame.font.init()
+        
+        menuOptionsDict = {
             "font_path": "fonts/Cave-Story.ttf",
             "font_size": 42,
             "color_background": (0, 0, 0),
@@ -76,6 +78,8 @@ class Application(object):
             }
         ]
         self.windowSurface = pygame.display.set_mode((500, 400), 0, 32)
+        
+        menuOptions = FSMenu.Options(menuOptionsDict)
         self.menu = FSMenu.Menu(self.windowSurface, menuStructure, menuOptions)
         
     def start(self):
