@@ -3,6 +3,7 @@ import os
 import os.path
 import json
 import imp
+import source.freesprints
 
 class PluginLoader:
     availablePlugins = None
@@ -59,8 +60,8 @@ class Plugin:
         
         print "FIND MODULE:"
         print self.module
-        
-        self.pluginObject = self.module.VisualisationPlugin()
+
+        self.pluginObject = self.module.VisualisationPlugin(source.freesprints.get_app())
         self.pluginObject.spinCount(123, 0)
         
 
