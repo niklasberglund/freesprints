@@ -20,6 +20,8 @@ else: # running on computer
 
 
 class Application(object):
+    instance = None
+    
     # application state constants
     STATE_MAINMENU = 0
     STATE_INGAME = 1
@@ -35,7 +37,6 @@ class Application(object):
         print "Application.__init__"
 
         pygame.font.init()
-        plugin_loader = plugins.PluginLoader()
 
         menu_options_dict = {
             "font_path": "fonts/Cave-Story.ttf",
@@ -91,6 +92,9 @@ class Application(object):
 
         menu_options = FSMenu.MenuOptions(menu_options_dict)
         self.menu = FSMenu.Menu(self.window_surface, menu_structure, menu_options)
+
+    def load_plugins(self):
+        plugin_loader = plugins.PluginLoader()
 
     def start_game(self):
         print "start game"
@@ -212,14 +216,22 @@ class Application(object):
         self.game_loop()
 
 
+
 app = None
+
+def get_app():
+    global app
+    if app == None:
+        app = Application()
+    
+    return app
+
 
 def init():
     global app
-    app = Application()
-
-def start():
-    global app
 
     print "start"
+    app = get_app()
+    app.load_plugins()
     app.start()
+
