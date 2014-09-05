@@ -79,7 +79,7 @@ class Application(object):
         ]
         self.windowSurface = pygame.display.set_mode((500, 400), 0, 32)
         
-        menuOptions = FSMenu.Options(menuOptionsDict)
+        menuOptions = FSMenu.MenuOptions(menuOptionsDict)
         self.menu = FSMenu.Menu(self.windowSurface, menuStructure, menuOptions)
         
     def start(self):

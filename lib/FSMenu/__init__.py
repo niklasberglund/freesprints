@@ -1,6 +1,7 @@
 import pygame, sys
 import pygame.font
-from pygame.locals import *
+#from pygame.locals import *
+import pygame.locals
 import timeit
 
 class Menu:
@@ -26,12 +27,12 @@ class Menu:
     
     def __init__(self, displaySurface, menuStructure, menuOptions = None):
         self.displaySurface = displaySurface
-        
+
         if menuOptions == None:
-            menuOptions = Options() # with default values
-        
+            menuOptions = MenuOptions() # with default values
+
         self.font = menuOptions.getItemFont()
-        
+
         # populate with MenuItem objects
         self.items = MenuItem.itemsListFromDict(menuStructure, menuOptions)
         self.currentItems = self.items
@@ -50,7 +51,7 @@ class Menu:
     def registerKeypress(self, key):
         print "registered key " + str(key)
         
-        if key == K_ESCAPE: # ESC
+        if key == pygame.locals.K_ESCAPE: # ESC
             if self.getParentMenu() != None:
                 self.currentItems = self.getSiblingsOfItem(self.getParentMenu())
                 self.currentIndex = 0
@@ -59,20 +60,20 @@ class Menu:
             else:
                 pygame.quit()
                 sys.exit()
-        elif key == K_q:
+        elif key == pygame.locals.K_q:
             pygame.quit()
             sys.exit()
-        elif key == K_UP:
+        elif key == pygame.locals.K_UP:
             print "UP"
             self.clearIndex = self.currentIndex
             self.moveUp()
             self.render()
-        elif key == K_DOWN:
+        elif key == pygame.locals.K_DOWN:
             print "DOWN"
             self.clearIndex = self.currentIndex
             self.moveDown()
             self.render()
-        elif key == K_RETURN:
+        elif key == pygame.locals.K_RETURN:
             print "selected item"
             
             selectedItem = self.currentItems[self.currentIndex]
@@ -86,8 +87,7 @@ class Menu:
                 self.render()
             else:
                 selectedItem.execute()
-    
-    #@profile
+
     def render(self):
         start_time = timeit.default_timer()
         
@@ -103,7 +103,7 @@ class Menu:
             
         elapsed_time = timeit.default_timer() - start_time
         print "\033[91mMenu.render time: " + str(elapsed_time) + "\033[0m"
-    
+
     def renderFull(self):
         #start_time = timeit.default_timer()
         
@@ -117,7 +117,7 @@ class Menu:
         
         #elapsed_time = timeit.default_timer() - start_time
         #print "\033[91mMenu.renderFull time: " + str(elapsed_time) + "\033[0m"
-        
+
     def renderChange(self):
         start_time = timeit.default_timer()
         if self.clearIndex == None:
@@ -129,11 +129,11 @@ class Menu:
         
         elapsed_time = timeit.default_timer() - start_time
         print "\033[91mMenu.renderChange time: " + str(elapsed_time) + "\033[0m"
-    
+
     def renderItemAtIndex(self, index):
         item = self.currentItems[index]
         
-        if (index == self.currentIndex):
+        if index == self.currentIndex:
             text = item.getHighlightedText()
         else:
             text = item.getText()
@@ -154,13 +154,13 @@ class Menu:
         
     def clear(self):
         self.displaySurface.fill(self.colorBlack)
-        
+
     def moveUp(self):
         if self.currentIndex > 0:
             self.currentIndex = self.currentIndex-1
             
         print "currentIndex:" + str(self.currentIndex)
-    
+
     def moveDown(self):
         if self.currentIndex < (len(self.currentItems)-1):
             self.currentIndex = self.currentIndex+1
@@ -170,7 +170,7 @@ class Menu:
     
     def getCurrentMenuItems(self):
         pass
-        
+
     def getSiblingsOfItem(self, needleItem, haystackList = None):
         if haystackList == None:
             haystackList = self.items
@@ -180,7 +180,7 @@ class Menu:
                 return haystackList
             
             elif item.hasSubmenu():
-                siblings = getSiblingsOfItem(needleItem, item.getSubmenu())
+                siblings = self.getSiblingsOfItem(needleItem, item.getSubmenu())
                 
                 if siblings != None:
                     return siblings
@@ -256,9 +256,9 @@ class MenuItem(object):
             itemsList.append(MenuItem(itemDict, menuOptions, itemsParent))
         
         return itemsList
-        
 
-class Options:
+
+class MenuOptions(object):
     # options
     font_name = None
     font_path = None
@@ -266,11 +266,11 @@ class Options:
     color_background = None
     color_text = None
     color_text_highlight = None
-    
+
     # created
     itemFont = None
     valueFont = None
-    
+
     def __init__(self, optionsDict):
         # read options
         self.font_name = optionsDict.get("font_name")
@@ -291,22 +291,9 @@ class Options:
             
         if self.font_path != None:
             self.itemFont = pygame.font.Font(self.font_path, self.font_size)
-        
+
     def getItemFont(self):
         return self.itemFont
-        
+
     def getValueFont(self):
         return self.valueFont
-        
-class MenuFolder(MenuItem):
-    def __init__(self, title):
-        pass
-        
-    def show(self):
-        pass
-        
-    def hide(self):
-        pass
-        
-    def registerKeypress(self, key):
-        pass
