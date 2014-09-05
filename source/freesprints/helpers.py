@@ -1,7 +1,7 @@
 import os
 import os.path
 
-def isRunningOnRPi():
+def is_running_on_rpi():
     if os.uname()[4][:3] == 'arm':
         return True
     else:
