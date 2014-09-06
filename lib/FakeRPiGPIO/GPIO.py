@@ -28,21 +28,21 @@ PWM = 43
     
 def setmode(self, mode):
     pass
-    
+
 def setup(self, number, highLow):
     pass
-    
+
 def input(self, number):
     pass
-    
+
 def output(self, number, highLow):
     pass
-    
+
 def wait_for_edge(self, number, edge):
     pass
-    
+
 def add_event_detect(self, number, risingFalling, callback):
     pass
-    
+
 def cleanup(self):
     pass
