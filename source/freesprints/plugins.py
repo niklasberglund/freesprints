@@ -62,6 +62,7 @@ class Plugin:
         print self.module
 
         self.pluginObject = self.module.VisualisationPlugin(source.freesprints.get_app())
+        self.pluginObject.start()
         self.pluginObject.spinCount(123, 0)
         
 
