@@ -171,13 +171,13 @@ class Application(object):
         basicFont = pygame.font.Font(font_path, 48)
 
         # set up the text
-        text = basicFont.render('asdasd', True, WHITE, BLUE)
-        textRect = text.get_rect()
-        textRect.centerx = self.window_surface.get_rect().centerx
-        textRect.centery = self.window_surface.get_rect().centery
+        #text = basicFont.render('asdasd', True, WHITE, BLUE)
+        #textRect = text.get_rect()
+        #textRect.centerx = self.window_surface.get_rect().centerx
+        #textRect.centery = self.window_surface.get_rect().centery
 
         # draw the white background onto the surface
-        self.window_surface.fill(WHITE)
+        self.window_surface.fill(BLACK)
 
         # draw a green polygon onto the surface
         pygame.draw.polygon(self.window_surface, GREEN, ((146, 0), (291, 106), (236, 277), (56, 277), (0, 106)))
@@ -191,10 +191,10 @@ class Application(object):
         pygame.draw.circle(self.window_surface, BLUE, (300, 50), 20, 0)
 
         # draw a red ellipse onto the surface
-        pygame.draw.ellipse(self.window_surface, RED, (300, 250, 40, 80), 1)
+        pygame.draw.ellipse(self.window_surface, RED, (450, 160, 40, 80), 1)
 
         # draw the text's background rectangle onto the surface
-        pygame.draw.rect(self.window_surface, RED, (textRect.left - 20, textRect.top - 20, textRect.width + 40, textRect.height + 40))
+        #pygame.draw.rect(self.window_surface, RED, (textRect.left - 20, textRect.top - 20, textRect.width + 40, textRect.height + 40))
 
         # get a pixel array of the surface
         #pixArray = pygame.PixelArray(self.window_surface)
@@ -202,7 +202,7 @@ class Application(object):
         #del pixArray
 
         # draw the text onto the surface
-        self.window_surface.blit(text, textRect)
+        #self.window_surface.blit(text, textRect)
 
         # image
         cyclist = pygame.image.load('images/1p_small.png').convert()
