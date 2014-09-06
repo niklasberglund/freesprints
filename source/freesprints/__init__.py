@@ -64,7 +64,8 @@ class Application(object):
                         "title": "Number of rollers",
                         "input": {
                             "type": "int",
-                            "verifier": None
+                            "verifier": None,
+                            "value": "2"
                         },
                         "callback": self.start_game
                     },
@@ -72,7 +73,8 @@ class Application(object):
                         "title": "Roller diameter(mm)",
                         "input": {
                             "type": "int",
-                            "verifier": None
+                            "verifier": None,
+                            "value": "200"
                         }
                     }
                 ]
