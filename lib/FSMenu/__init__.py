@@ -199,6 +199,10 @@ class MenuItem(object):
     text = None
     highlightedText = None
     
+    input_type = None
+    input_verifier = None
+    input_value = None
+    
     
     def __init__(self, dict, menuOptions, itemParent = None):
         print "dict:"
@@ -208,6 +212,12 @@ class MenuItem(object):
         self.font = menuOptions.getItemFont()
         
         self.callback = dict.get("callback")
+        
+        input = dict.get("input")
+        if input != None:
+            self.input_type = input.get("type")
+            self.input_verifier = input.get("verifier")
+            self.input_value = input.get("value")
         
         if dict.has_key("submenu"):
             self.submenu = MenuItem.itemsListFromDict(dict['submenu'], menuOptions, self)
@@ -238,13 +248,49 @@ class MenuItem(object):
         
     def getText(self):
         if self.text == None:
-            self.text = self.font.render(self.title, True, Menu.colorWhite, None)
+            title_string = self.title if self.input_value == None else self.title + ":"
+            item_text = self.font.render(title_string, True, Menu.colorWhite, None)
+            item_value = self.font.render(self.input_value, True, Menu.colorGreen, None)
+            item_text_rect = item_text.get_rect()
+            item_value_rect = item_value.get_rect()
+            width = item_text_rect.width + item_value_rect.width
+            height = item_text_rect.height
+            
+            item_text_rect.x = 0
+            item_text_rect.y = 0
+            
+            item_value_rect.x = item_text_rect.width
+            item_value_rect.y = 0
+            
+            text_surface = pygame.Surface([width, height], pygame.SRCALPHA, 32)
+            text_surface.blit(item_text, item_text_rect)
+            text_surface.blit(item_value, item_value_rect)
+            
+            self.text = text_surface
         
         return self.text
         
     def getHighlightedText(self):
         if self.highlightedText == None:
-            self.highlightedText = self.font.render(self.title, True, Menu.colorRed, None)
+            title_string = self.title if self.input_value == None else self.title + ":"
+            item_text = self.font.render(title_string, True, Menu.colorRed, None)
+            item_value = self.font.render(self.input_value, True, Menu.colorGreen, None)
+            item_text_rect = item_text.get_rect()
+            item_value_rect = item_value.get_rect()
+            width = item_text_rect.width + item_value_rect.width
+            height = item_text_rect.height
+            
+            item_text_rect.x = 0
+            item_text_rect.y = 0
+            
+            item_value_rect.x = item_text_rect.width
+            item_value_rect.y = 0
+            
+            text_surface = pygame.Surface([width, height], pygame.SRCALPHA, 32)
+            text_surface.blit(item_text, item_text_rect)
+            text_surface.blit(item_value, item_value_rect)
+            
+            self.highlightedText = text_surface
             
         return self.highlightedText
         
