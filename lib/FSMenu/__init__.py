@@ -238,13 +238,13 @@ class MenuItem(object):
         
     def getText(self):
         if self.text == None:
-            self.text = self.font.render(self.title, True, Menu.colorWhite, Menu.colorBlue)
+            self.text = self.font.render(self.title, True, Menu.colorWhite, None)
         
         return self.text
         
     def getHighlightedText(self):
         if self.highlightedText == None:
-            self.highlightedText = self.font.render(self.title, True, Menu.colorRed, Menu.colorBlue)
+            self.highlightedText = self.font.render(self.title, True, Menu.colorRed, None)
             
         return self.highlightedText
         
