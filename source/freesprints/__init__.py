@@ -21,6 +21,7 @@ else: # running on computer
 
 class Application(object):
     instance = None
+    state = None
     
     # application state constants
     STATE_MAINMENU = 0
@@ -100,6 +101,7 @@ class Application(object):
 
     def start_game(self):
         print "start game"
+        self.state = self.STATE_INGAME
         plugins = self.plugin_loader.getAvailablePlugins()
         plugins[0].start()
 
@@ -123,7 +125,11 @@ class Application(object):
                 if event.type == pygame.locals.QUIT:
                     self.exit()
                 elif event.type == pygame.locals.KEYUP:
-                    self.menu.registerKeypress(event.key)
+                    if self.state == self.STATE_MAINMENU:
+                        self.menu.registerKeypress(event.key)
+                    elif event.key == pygame.locals.K_ESCAPE:
+                        self.exit()
+                    
 
     def start(self):
         # set up pygame
