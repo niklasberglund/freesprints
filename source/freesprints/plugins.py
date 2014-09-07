@@ -4,6 +4,7 @@ import os.path
 import json
 import imp
 import source.freesprints
+from pygame.locals import *
 
 class PluginLoader:
     availablePlugins = None
@@ -32,7 +33,7 @@ class PluginLoader:
                 
         
     def getAvailablePlugins(self):
-        pass
+        return self.availablePlugins
         
 class Plugin:
     path = None
@@ -62,11 +63,12 @@ class Plugin:
         print self.module
 
         self.pluginObject = self.module.VisualisationPlugin(source.freesprints.get_app())
+        #self.pluginObject.start()
+        #self.pluginObject.spinCount(123, 0)
+
+    def start(self):
+        source.freesprints.get_app().get_window_surface().fill(Color("black"))
         self.pluginObject.start()
-        self.pluginObject.spinCount(123, 0)
-        
-
-
 
 
 

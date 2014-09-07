@@ -96,10 +96,12 @@ class Application(object):
         self.menu = FSMenu.Menu(self.window_surface, menu_structure, menu_options)
 
     def load_plugins(self):
-        plugin_loader = plugins.PluginLoader()
+        self.plugin_loader = plugins.PluginLoader()
 
     def start_game(self):
         print "start game"
+        plugins = self.plugin_loader.getAvailablePlugins()
+        plugins[0].start()
 
     def show_options(self):
         print "show options"
@@ -110,6 +112,9 @@ class Application(object):
 
     def hide(self):
         pass
+
+    def get_window_surface(self):
+        return self.window_surface
 
     def game_loop(self):
         # run the game loop
@@ -216,7 +221,6 @@ class Application(object):
 
         self.menu.render()
         self.game_loop()
-
 
 
 app = None

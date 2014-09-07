@@ -1,5 +1,5 @@
 
-class Game:
+class Game(object):
     def __init__(self):
         pass
 
@@ -10,11 +10,16 @@ class Game:
         pass
 
 
-class Options:
+class Options(object):
     def __init__(self):
         pass
 
 
-class Player:
+class Player(object):
     def __init__(self, name, color):
+        pass
+
+
+class Roller(object):
+    def __init__(self):
         pass
