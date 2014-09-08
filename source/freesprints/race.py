@@ -1,5 +1,7 @@
 
 class Race(object):
+    participants = None
+    
     def __init__(self):
         pass
 
@@ -20,7 +22,7 @@ class Participant(object):
     name = None
     color = None
     
-    def __init__(self, roller, name, color):
+    def __init__(self, roller, name = "", color = None):
         pass
 
 
@@ -30,5 +32,7 @@ class Roller(object):
 
 
 class RollerController(object):
+    sensor_roller_list = None
+    
     def __init__(self):
         pass
