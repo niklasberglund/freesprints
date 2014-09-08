@@ -16,10 +16,19 @@ class Options(object):
 
 
 class Player(object):
-    def __init__(self, name, color):
+    roller = None
+    name = None
+    color = None
+    
+    def __init__(self, roller, name, color):
         pass
 
 
 class Roller(object):
+    def __init__(self):
+        pass
+
+
+class RollerController(object):
     def __init__(self):
         pass
