@@ -1,5 +1,5 @@
 
-class Game(object):
+class Race(object):
     def __init__(self):
         pass
 
@@ -15,7 +15,7 @@ class Options(object):
         pass
 
 
-class Player(object):
+class Participant(object):
     roller = None
     name = None
     color = None

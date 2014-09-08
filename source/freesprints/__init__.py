@@ -50,11 +50,11 @@ class Application(object):
         menu_structure = [
             {
                 "title": "New race",
-                "callback": self.start_game,
+                "callback": self.start_race,
                 "submenu": [
                     {
                         "title": "Start",
-                        "callback": self.start_game
+                        "callback": self.start_race
                     },
                     {
                         "title": "Race visualizer",
@@ -68,7 +68,7 @@ class Application(object):
                             "verifier": None,
                             "value": "2"
                         },
-                        "callback": self.start_game
+                        "callback": self.start_race
                     },
                     {
                         "title": "Roller diameter(mm)",
@@ -99,7 +99,7 @@ class Application(object):
     def load_plugins(self):
         self.plugin_loader = plugins.PluginLoader()
 
-    def start_game(self):
+    def start_race(self):
         print "start game"
         self.state = self.STATE_INGAME
         plugins = self.plugin_loader.getAvailablePlugins()
