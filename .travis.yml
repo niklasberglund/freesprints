@@ -7,3 +7,4 @@ install:
     - sudo apt-get install -qq python-pygame
 virtualenv:
     system_site_packages: true
+script: nosetests
