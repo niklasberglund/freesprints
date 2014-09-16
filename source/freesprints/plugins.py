@@ -66,9 +66,9 @@ class Plugin:
         #self.plugin_object.start()
         #self.plugin_object.spinCount(123, 0)
 
-    def start(self):
+    def start(self, race_options):
         source.freesprints.get_app().get_window_surface().fill(Color("black"))
-        self.plugin_object.start()
+        self.plugin_object.start(race_options)
 
 
 

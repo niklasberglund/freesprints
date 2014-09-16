@@ -14,7 +14,7 @@ class VisualisationPlugin:
         self.application = application_object
         self.display_surface = self.application.get_window_surface()
 
-    def start(self):
+    def start(self, race_options):
         print "start in plugin"
         self.render()
 

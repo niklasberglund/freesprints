@@ -1,11 +1,12 @@
 import pygame, sys
 import pygame.font
-import pygame.locals
+from pygame.locals import *
 import logging
 import FSMenu
 import helpers as helpers
 import plugins
 import os.path
+import race
 
 # platform-specific imports
 if helpers.is_running_on_rpi():# running on Raspberry Pi
@@ -102,8 +103,15 @@ class Application(object):
     def start_race(self):
         print "start game"
         self.state = self.STATE_INGAME
+        
+        race_options = race.Options()
+        race_options.set_participants([
+            race.Participant("Niklas", 7, Color("red")),
+            race.Participant("Some loser", 11, Color("blue"))
+        ])
+        
         plugins = self.plugin_loader.getAvailablePlugins()
-        plugins[0].start()
+        plugins[0].start(race_options)
 
     def show_options(self):
         print "show options"
