@@ -7,6 +7,7 @@ import helpers as helpers
 import plugins
 import os.path
 import race
+import hardware
 
 # platform-specific imports
 if helpers.is_running_on_rpi():# running on Raspberry Pi
@@ -34,6 +35,7 @@ class Application(object):
     menu = None
     state = STATE_MAINMENU
     plugin_loader = None
+    roller_controller = None
 
     def __init__(self):
         print "Application.__init__"
@@ -96,6 +98,8 @@ class Application(object):
 
         menu_options = FSMenu.MenuOptions(menu_options_dict)
         self.menu = FSMenu.Menu(self.window_surface, menu_structure, menu_options)
+        
+        self.roller_controller = hardware.RollerController()
 
     def load_plugins(self):
         self.plugin_loader = plugins.PluginLoader()
