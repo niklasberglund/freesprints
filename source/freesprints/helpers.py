@@ -15,3 +15,12 @@ def rootPath():
 
 def pluginsPath():
     return os.path.abspath(os.path.join(rootPath(), "plugins"))
+
+def string_representation(object, variable_dict):
+    str = "({0}):".format(object.__class__)
+    i = 0
+    for key in variable_dict:
+        str = str + "\n\t{0} = {1}".format(key, variable_dict[key])
+        i = i+1
+    
+    return str
