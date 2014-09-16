@@ -16,6 +16,8 @@ class VisualisationPlugin:
 
     def start(self, race_options):
         print "start in plugin"
+        print "race options sent to plugin:"
+        print race_options
         self.render()
 
     def spinCount(self, count, roller):
