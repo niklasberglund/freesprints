@@ -16,9 +16,14 @@ class Roller(object):
     
     def __init__(self, pin):
         self.pin = pin
+        GPIO.setup(pin, GPIO.IN)
+        GPIO.add_event_detect(pin, GPIO.RISING, self.event_callback)
     
     def set_spin_callback(self, callback_function):
         self.spin_callback = callback_function
+        
+    def event_callback(self, channel):
+        print "CALLBACK"
     
     
 
