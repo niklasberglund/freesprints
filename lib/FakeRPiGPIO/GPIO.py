@@ -26,23 +26,23 @@ I2C = 42
 PWM = 43
 
     
-def setmode(self, mode):
+def setmode(mode):
     pass
 
-def setup(self, number, highLow):
+def setup(number, highLow):
     pass
 
-def input(self, number):
+def input(number):
     pass
 
-def output(self, number, highLow):
+def output(number, highLow):
     pass
 
-def wait_for_edge(self, number, edge):
+def wait_for_edge(number, edge):
     pass
 
-def add_event_detect(self, number, risingFalling, callback):
+def add_event_detect(number, risingFalling, callback):
     pass
 
-def cleanup(self):
+def cleanup():
     pass
