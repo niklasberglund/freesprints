@@ -1,4 +1,5 @@
 from pygame.locals import *
+import helpers
 
 class Race(object):
     options = None
@@ -32,6 +33,12 @@ class Options(object):
     
     def get_participants(self):
         return self.participants
+        
+    def __str__(self):
+        return helpers.string_representation(self, {
+            "participants": self.participants,
+            "distance": self.distance
+        })
 
 
 class Participant(object):
