@@ -3,11 +3,9 @@ import helpers
 
 class Race(object):
     options = None
-    participants = None
     
     def __init__(self, options_object):
         self.options = options_object
-        self.participants = participants_list
 
     def start(self):
         pass
