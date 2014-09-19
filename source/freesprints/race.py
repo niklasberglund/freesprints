@@ -1,5 +1,6 @@
 from pygame.locals import *
 import helpers
+import hardware
 
 class Race(object):
     options = None
@@ -45,16 +46,5 @@ class Participant(object):
     color = None
     
     def __init__(self, name, roller_pin, color = Color("pink")):
-        self.roller = Roller(roller_pin)
+        self.roller = hardware.Roller(roller_pin)
 
-
-class Roller(object):
-    def __init__(self, pin_number):
-        pass
-
-
-class RollerController(object):
-    sensor_roller_list = None
-    
-    def __init__(self):
-        pass
