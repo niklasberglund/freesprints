@@ -153,7 +153,24 @@ class Menu:
         self.displaySurface.blit(text, textRect)
         
     def clear(self):
-        self.displaySurface.fill(self.colorBlack)
+        #self.displaySurface.fill(self.colorBlack)
+        leftmost_x = 0
+        rightmost_x = 0
+        
+        last_item_rect = self.currentItems[-1].getText().get_rect()
+        
+        for menu_item in self.currentItems:
+            rect = menu_item.getText().get_rect()
+            if (rect.x < leftmost_x ): leftmost_x = rect.x
+            if (rect.x + rect.width > rightmost_x): rightmost_x = rect.x + rect.width
+        
+        clear_width = rightmost_x - leftmost_x
+        clear_height = last_item_rect.height * len(self.currentItems)
+        clear_x = self.displaySurface.get_rect().centerx - (clear_width/2)
+        clear_y = self.displaySurface.get_rect().centery - ((len(self.currentItems)*last_item_rect.height)/2)
+        clear_rect = pygame.Rect(clear_x, clear_y, clear_width, clear_height)
+        
+        self.displaySurface.fill(pygame.locals.Color("black"), clear_rect)
 
     def moveUp(self):
         if self.currentIndex > 0:
