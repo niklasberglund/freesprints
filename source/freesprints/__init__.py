@@ -205,36 +205,25 @@ class Application(object):
         self.window_surface.fill(BLACK)
 
         # draw a green polygon onto the surface
-        pygame.draw.polygon(self.window_surface, GREEN, ((146, 0), (291, 106), (236, 277), (56, 277), (0, 106)))
+        #pygame.draw.polygon(self.window_surface, GREEN, ((146, 0), (291, 106), (236, 277), (56, 277), (0, 106)))
 
         # draw some blue lines onto the surface
-        pygame.draw.line(self.window_surface, BLUE, (60, 60), (120, 60), 4)
-        pygame.draw.line(self.window_surface, BLUE, (120, 60), (60, 120))
-        pygame.draw.line(self.window_surface, BLUE, (60, 120), (120, 120), 4)
+        #pygame.draw.line(self.window_surface, BLUE, (60, 60), (120, 60), 4)
+        #pygame.draw.line(self.window_surface, BLUE, (120, 60), (60, 120))
+        #pygame.draw.line(self.window_surface, BLUE, (60, 120), (120, 120), 4)
 
         # draw a blue circle onto the surface
-        pygame.draw.circle(self.window_surface, BLUE, (300, 50), 20, 0)
+        #pygame.draw.circle(self.window_surface, BLUE, (300, 50), 20, 0)
 
         # draw a red ellipse onto the surface
-        pygame.draw.ellipse(self.window_surface, RED, (450, 160, 40, 80), 1)
-
-        # draw the text's background rectangle onto the surface
-        #pygame.draw.rect(self.window_surface, RED, (textRect.left - 20, textRect.top - 20, textRect.width + 40, textRect.height + 40))
-
-        # get a pixel array of the surface
-        #pixArray = pygame.PixelArray(self.window_surface)
-        #pixArray[480][380] = BLACK
-        #del pixArray
-
-        # draw the text onto the surface
-        #self.window_surface.blit(text, textRect)
-
-        # image
-        cyclist = pygame.image.load('images/1p_small.png').convert()
-        cyclistRect = cyclist.get_rect()
-        cyclistRect.centerx = 100
-        cyclistRect.centery = 100
-        self.window_surface.blit(cyclist, cyclistRect)
+        #pygame.draw.ellipse(self.window_surface, RED, (450, 160, 40, 80), 1)
+        
+        # menu background
+        background = pygame.image.load('images/menu_background.png').convert()
+        backgroundRect = background.get_rect()
+        backgroundRect.x = 0
+        backgroundRect.y = 0
+        self.window_surface.blit(background, backgroundRect)
 
         # draw the window onto the screen
         pygame.display.update()
