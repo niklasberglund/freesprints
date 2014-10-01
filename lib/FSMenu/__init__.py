@@ -53,9 +53,9 @@ class Menu:
         
         if key == pygame.locals.K_ESCAPE: # ESC
             if self.getParentMenu() != None:
+                self.clear()
                 self.currentItems = self.getSiblingsOfItem(self.getParentMenu())
                 self.currentIndex = 0
-                self.clear()
                 self.render()
             else:
                 pygame.quit()
@@ -81,9 +81,9 @@ class Menu:
             print selectedItem
             
             if selectedItem.hasSubmenu():
+                self.clear()
                 self.currentItems = selectedItem.getSubmenu()
                 self.currentIndex = 0
-                self.clear()
                 self.render()
             else:
                 selectedItem.execute()
