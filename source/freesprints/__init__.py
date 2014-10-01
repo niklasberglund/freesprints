@@ -9,6 +9,8 @@ import os.path
 import race
 import hardware
 
+DISPLAY_RESOLUTION = (1024, 768)
+
 # platform-specific imports
 if helpers.is_running_on_rpi():# running on Raspberry Pi
     import RPi.GPIO
@@ -94,7 +96,7 @@ class Application(object):
         ]
         #self.window_surface = pygame.display.set_mode((500, 400), pygame.FULLSCREEN, 32)
         pygame.display.init()
-        self.window_surface = pygame.display.set_mode((800, 600), 0, 32)
+        self.window_surface = pygame.display.set_mode(DISPLAY_RESOLUTION, 0, 32)
 
         menu_options = FSMenu.MenuOptions(menu_options_dict)
         self.menu = FSMenu.Menu(self.window_surface, menu_structure, menu_options)
