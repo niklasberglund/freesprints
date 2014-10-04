@@ -24,6 +24,12 @@ class VisualisationPlugin:
         print "spinCount in plugin"
 
     def render(self):
+        background = pygame.image.load('images/needles-background-1024x768.png').convert()
+        backgroundRect = background.get_rect()
+        backgroundRect.x = 0
+        backgroundRect.y = 0
+        self.display_surface.blit(background, backgroundRect)
+        
         needle = pygame.image.load('images/needle.png').convert()
         needleRect = needle.get_rect()
         needleRect.centerx = 600
