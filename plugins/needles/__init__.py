@@ -29,6 +29,11 @@ class VisualisationPlugin:
 
     def render(self):
         background_image_path = os.path.join(self.plugin_object.path, "images/background-1024x768.png")
+        # Resolution
+        display_info = pygame.display.Info()
+        display_width = display_info.current_w
+        display_height = display_info.current_h
+        
         background = pygame.image.load(background_image_path).convert()
         backgroundRect = background.get_rect()
         backgroundRect.x = 0
