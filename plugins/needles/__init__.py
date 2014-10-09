@@ -6,12 +6,14 @@ class VisualisationPlugin:
     meter_center = (200, 200)
     needle_length = 100
     display_surface = None
+    plugin_object = None
     
     application = None
     
-    def __init__(self, application_object):
+    def __init__(self, application_object, plugin_object):
         print "init in plugin"
         self.application = application_object
+        self.plugin_object = plugin_object
         self.display_surface = self.application.get_window_surface()
 
     def start(self, race_options):

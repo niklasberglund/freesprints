@@ -65,7 +65,7 @@ class Plugin:
         print "FIND MODULE:"
         print self.module
 
-        self.plugin_object = self.module.VisualisationPlugin(source.freesprints.get_app())
+        self.plugin_object = self.module.VisualisationPlugin(source.freesprints.get_app(), self)
         #self.plugin_object.start()
         #self.plugin_object.spinCount(123, 0)
 
