@@ -21,6 +21,9 @@ class PluginLoader:
         
         for plugin_path in plugin_dirs:
             print plugin_path
+            if plugin_path == ".DS_Store":
+                continue
+            
             plugin_path_absolute = os.path.join(helpers.pluginsPath(), plugin_path)
             json_info_path = os.path.join(plugin_path_absolute, "info.json")
             
