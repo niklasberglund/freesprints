@@ -6,8 +6,8 @@ import timeit
 
 class Menu:
     items = []
-    currentItems = None
-    currentIndex = 0
+    current_items = None
+    current_index = 0
     menuPosition = []
     displaySurface = None
     
@@ -35,7 +35,7 @@ class Menu:
 
         # populate with MenuItem objects
         self.items = MenuItem.itemsListFromDict(menuStructure, menuOptions)
-        self.currentItems = self.items
+        self.current_items = self.items
         
         
     def show(self):
@@ -45,8 +45,8 @@ class Menu:
         pass
         
     def getParentMenu(self):
-        print self.currentItems[0].getParentMenu()
-        return self.currentItems[0].getParentMenu()
+        print self.current_items[0].getParentMenu()
+        return self.current_items[0].getParentMenu()
         
     def registerKeypress(self, key):
         print "registered key " + str(key)
@@ -54,8 +54,8 @@ class Menu:
         if key == pygame.locals.K_ESCAPE: # ESC
             if self.getParentMenu() != None:
                 self.clear()
-                self.currentItems = self.getSiblingsOfItem(self.getParentMenu())
-                self.currentIndex = 0
+                self.current_items = self.getSiblingsOfItem(self.getParentMenu())
+                self.current_index = 0
                 self.render()
             else:
                 pygame.quit()
@@ -65,25 +65,25 @@ class Menu:
             sys.exit()
         elif key == pygame.locals.K_UP:
             print "UP"
-            self.clearIndex = self.currentIndex
+            self.clearIndex = self.current_index
             self.moveUp()
             self.render()
         elif key == pygame.locals.K_DOWN:
             print "DOWN"
-            self.clearIndex = self.currentIndex
+            self.clearIndex = self.current_index
             self.moveDown()
             self.render()
         elif key == pygame.locals.K_RETURN:
             print "selected item"
             
-            selectedItem = self.currentItems[self.currentIndex]
+            selectedItem = self.current_items[self.current_index]
             
             print selectedItem
             
             if selectedItem.hasSubmenu():
                 self.clear()
-                self.currentItems = selectedItem.getSubmenu()
-                self.currentIndex = 0
+                self.current_items = selectedItem.getSubmenu()
+                self.current_index = 0
                 self.render()
             else:
                 selectedItem.execute()
@@ -96,7 +96,7 @@ class Menu:
         else:
             print "PARTIAL RENDER"
             self.renderItemAtIndex(self.clearIndex)
-            self.renderItemAtIndex(self.currentIndex)
+            self.renderItemAtIndex(self.current_index)
             self.clearIndex = None
             
         pygame.display.update()
@@ -110,8 +110,8 @@ class Menu:
         print "Menu.render"
         
         i = 0
-        for menuItem in self.currentItems:
-            print "currentIndex: " + str(self.currentIndex)
+        for menuItem in self.current_items:
+            print "current_index: " + str(self.current_index)
             self.renderItemAtIndex(i)
             i = i+1
         
@@ -124,16 +124,16 @@ class Menu:
             self.renderFull()
         else:
             self.renderItemAtIndex(self.clearIndex)
-            self.renderItemAtIndex(self.currentIndex)
+            self.renderItemAtIndex(self.current_index)
             self.clearIndex = None
         
         elapsed_time = timeit.default_timer() - start_time
         print "\033[91mMenu.renderChange time: " + str(elapsed_time) + "\033[0m"
 
     def renderItemAtIndex(self, index):
-        item = self.currentItems[index]
+        item = self.current_items[index]
         
-        if index == self.currentIndex:
+        if index == self.current_index:
             text = item.getHighlightedText()
         else:
             text = item.getText()
@@ -141,7 +141,7 @@ class Menu:
         textRect = text.get_rect()
         height = textRect.height
         
-        menuStartY = self.displaySurface.get_rect().centery - ((len(self.currentItems)*height)/2)
+        menuStartY = self.displaySurface.get_rect().centery - ((len(self.current_items)*height)/2)
         y = menuStartY + (index*height)
         
         textRect.centerx = self.displaySurface.get_rect().centerx
@@ -157,33 +157,33 @@ class Menu:
         leftmost_x = 0
         rightmost_x = 0
         
-        last_item_rect = self.currentItems[-1].getText().get_rect()
+        last_item_rect = self.current_items[-1].getText().get_rect()
         
-        for menu_item in self.currentItems:
+        for menu_item in self.current_items:
             rect = menu_item.getText().get_rect()
             if (rect.x < leftmost_x ): leftmost_x = rect.x
             if (rect.x + rect.width > rightmost_x): rightmost_x = rect.x + rect.width
         
         clear_width = rightmost_x - leftmost_x
-        clear_height = last_item_rect.height * len(self.currentItems)
+        clear_height = last_item_rect.height * len(self.current_items)
         clear_x = self.displaySurface.get_rect().centerx - (clear_width/2)
-        clear_y = self.displaySurface.get_rect().centery - ((len(self.currentItems)*last_item_rect.height)/2)
+        clear_y = self.displaySurface.get_rect().centery - ((len(self.current_items)*last_item_rect.height)/2)
         clear_rect = pygame.Rect(clear_x, clear_y, clear_width, clear_height)
         
         self.displaySurface.fill(pygame.locals.Color("black"), clear_rect)
 
     def moveUp(self):
-        if self.currentIndex > 0:
-            self.currentIndex = self.currentIndex-1
+        if self.current_index > 0:
+            self.current_index = self.current_index-1
             
-        print "currentIndex:" + str(self.currentIndex)
+        print "current_index:" + str(self.current_index)
 
     def moveDown(self):
-        if self.currentIndex < (len(self.currentItems)-1):
-            self.currentIndex = self.currentIndex+1
+        if self.current_index < (len(self.current_items)-1):
+            self.current_index = self.current_index+1
             
-        print "currentIndex:" + str(self.currentIndex)
-        print self.currentItems
+        print "current_index:" + str(self.current_index)
+        print self.current_items
     
     def getCurrentMenuItems(self):
         pass
