@@ -145,6 +145,16 @@ class Application(object):
                         self.menu.registerKeypress(event.key)
                     elif event.key == pygame.locals.K_ESCAPE:
                         self.exit()
+                    elif event.key == pygame.locals.K_a:
+                        if (self.race_options):
+                            participant = self.race_options.participants[0]
+                            participant.increase_distance(0.5)
+                            print self.race_options.participants[0].distance
+                    elif event.key == pygame.locals.K_s:
+                        if (self.race_options):
+                            participant = self.race_options.participants[1]
+                            participant.increase_distance(0.5)
+                            print self.race_options.participants[1].distance
                     
 
     def start(self):
