@@ -44,7 +44,14 @@ class Participant(object):
     roller = None
     name = None
     color = None
+    distance = 0
     
     def __init__(self, name, roller_pin, color = Color("pink")):
         self.roller = hardware.Roller(roller_pin)
+    
+    def set_distance(self, new_distance):
+        self.distance = new_distance
+    
+    def increase_distance(self, increment):
+        self.distance = self.distance + increment
 
