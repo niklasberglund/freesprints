@@ -10,6 +10,8 @@ class VisualisationPlugin:
     display_surface = None
     plugin_object = None
     
+    gauge_center = (514, 375) # gauge center position in background image
+    
     application = None
     
     def __init__(self, application_object, plugin_object):
@@ -40,16 +42,24 @@ class VisualisationPlugin:
         backgroundRect.y = 0
         self.display_surface.blit(background, backgroundRect)
         
-        needle_image_path = os.path.join(self.plugin_object.path, "images/needle.png")
-        needle = pygame.image.load(needle_image_path).convert()
-        needleRect = needle.get_rect()
-        needleRect.centerx = 600
-        needleRect.centery = 500
-        self.display_surface.blit(needle, needleRect)
+        #needle_image_path = os.path.join(self.plugin_object.path, "images/needle.png")
+        #needle = pygame.image.load(needle_image_path).convert()
+        #needleRect = needle.get_rect()
+        #needleRect.centerx = 600
+        #needleRect.centery = 500
+        #self.display_surface.blit(needle, needleRect)     
         
-        angle = 45
-        end_x = self.meter_center[0] + math.cos(math.radians(angle)) * self.needle_length
-        end_y = self.meter_center[1] + math.sin(math.radians(angle)) * self.needle_length
-        pygame.draw.line(self.display_surface, Color("red"), self.meter_center, (end_x, end_y), 1)
+        line_length = 140
+        
+        line1_angle = 0
+        line1_x2 = self.gauge_center[0] + math.cos(math.radians(line1_angle - 90)) * line_length
+        line1_y2 = self.gauge_center[1] + math.sin(math.radians(line1_angle - 90)) * line_length
+        pygame.draw.line(self.display_surface, Color("red"), self.gauge_center, (line1_x2, line1_y2), 1)
+        
+        line2_angle = 270
+        line2_angle_radians = line2_angle * (180 / math.pi)
+        line2_x2 = self.gauge_center[0] + math.cos(math.radians(line2_angle - 90)) * line_length
+        line2_y2 = self.gauge_center[1] + math.sin(math.radians(line2_angle - 90)) * line_length
+        pygame.draw.line(self.display_surface, Color("blue"), self.gauge_center, (line2_x2, line2_y2), 1)
         
         pygame.display.update()
