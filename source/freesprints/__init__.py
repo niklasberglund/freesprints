@@ -39,6 +39,7 @@ class Application(object):
     state = STATE_MAINMENU
     plugin_loader = None
     roller_controller = None
+    race_options = None
 
     def __init__(self):
         print "Application.__init__"
@@ -111,14 +112,14 @@ class Application(object):
         print "start game"
         self.state = self.STATE_INGAME
         
-        race_options = race.Options()
-        race_options.set_participants([
+        self.race_options = race.Options()
+        self.race_options.set_participants([
             race.Participant("Niklas", 7, Color("red")),
             race.Participant("Some loser", 11, Color("blue"))
         ])
         
         plugins = self.plugin_loader.getAvailablePlugins()
-        plugins[0].start(race_options)
+        plugins[0].start(self.race_options)
 
     def show_options(self):
         print "show options"
