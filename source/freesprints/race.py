@@ -4,15 +4,20 @@ import hardware
 
 class Race(object):
     options = None
+    participants = None
     
-    def __init__(self, options_object):
+    def __init__(self, options_object, participants_list = None):
         self.options = options_object
+        self.participants = participants_list
 
     def start(self):
         pass
         
     def render(self):
         pass
+    
+    def set_participants(self, participants_list):
+        self.participants = participants_list
 
 
 class Options(object):
