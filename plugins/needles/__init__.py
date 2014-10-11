@@ -88,20 +88,7 @@ class VisualisationPlugin:
         #needleRect = needle.get_rect()
         #needleRect.centerx = 600
         #needleRect.centery = 500
-        #self.display_surface.blit(needle, needleRect)     
-        
-        line_length = 140
-        
-        line1_angle = 0
-        line1_x2 = self.gauge_center[0] + math.cos(math.radians(line1_angle - 90)) * line_length
-        line1_y2 = self.gauge_center[1] + math.sin(math.radians(line1_angle - 90)) * line_length
-        pygame.draw.line(self.display_surface, Color("red"), self.gauge_center, (line1_x2, line1_y2), 1)
-        
-        line2_angle = 270
-        line2_angle_radians = line2_angle * (180 / math.pi)
-        line2_x2 = self.gauge_center[0] + math.cos(math.radians(line2_angle - 90)) * line_length
-        line2_y2 = self.gauge_center[1] + math.sin(math.radians(line2_angle - 90)) * line_length
-        pygame.draw.line(self.display_surface, Color("blue"), self.gauge_center, (line2_x2, line2_y2), 1)
+        #self.display_surface.blit(needle, needleRect)
         
         pygame.display.update()
     
