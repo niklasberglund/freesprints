@@ -74,7 +74,7 @@ class VisualisationPlugin:
         display_width = display_info.current_w
         display_height = display_info.current_h
         
-        background_image_path = os.path.join(self.plugin_object.path, "images/background-wood2-1024x768.png")
+        background_image_path = os.path.join(self.plugin_object.path, "images/background-wood3-1024x768.png")
         self.background_image = pygame.image.load(background_image_path).convert()
         backgroundRect = self.background_image.get_rect()
         backgroundRect.x = 0
@@ -133,7 +133,7 @@ class VisualisationPlugin:
         time_font = pygame.font.Font(font_path, 68)
 
         # set up the text
-        time_string = str(round(self.race_object.elapsed_time(), 2))
+        time_string = '{0:.2f}'.format(round(self.race_object.elapsed_time(), 2))
         print time_string
         text = time_font.render(time_string, True, Color("white"), None)
         text_rect = text.get_rect()
