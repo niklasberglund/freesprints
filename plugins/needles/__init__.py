@@ -18,6 +18,8 @@ class VisualisationPlugin:
     
     background_image = None
     
+    font_big = None
+    
     gauge_center = (514, 375) # gauge center position in background image
     gauge_rect = pygame.Rect(330, 200, 360, 350)
     time_display_rect = pygame.Rect(10, 10, 180, 80)
@@ -29,6 +31,9 @@ class VisualisationPlugin:
         self.application = application_object
         self.plugin_object = plugin_object
         self.display_surface = self.application.get_window_surface()
+        
+        font_path = "./fonts/Cave-Story.ttf"
+        self.font_big = pygame.font.Font(font_path, 68)
 
     def start(self, race_object):
         print "start in plugin"
@@ -117,14 +122,11 @@ class VisualisationPlugin:
 
     def update_time_display(self):
         self.display_surface.fill(Color("black"), self.time_display_rect)
-        
-        font_path = "./fonts/Cave-Story.ttf"
-        time_font = pygame.font.Font(font_path, 68)
 
         # set up the text
         time_string = '{0:.2f}'.format(self.race_object.elapsed_time())
         print time_string
-        text = time_font.render(time_string, True, Color("white"), None)
+        text = self.font_big.render(time_string, True, Color("white"), None)
         text_rect = text.get_rect()
         text_rect.centerx = self.time_display_rect.centerx
         text_rect.centery = self.time_display_rect.centery
@@ -138,10 +140,8 @@ class VisualisationPlugin:
         box_rect = pygame.Rect(position[0], position[1], self.participant_info_box_width, self.participant_info_box_height)
         self.display_surface.fill(participant.color, box_rect)
         
-        font_path = "./fonts/Cave-Story.ttf"
-        distance_font = pygame.font.Font(font_path, 68)
         distance_string = str('{0:.2f}'.format(participant.distance))
-        text = distance_font.render(distance_string, True, Color("white"), None)
+        text = self.font_big.render(distance_string, True, Color("white"), None)
         text_rect = text.get_rect()
         text_rect.centerx = box_rect.centerx
         text_rect.centery = box_rect.centery
