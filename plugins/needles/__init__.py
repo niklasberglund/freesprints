@@ -9,6 +9,7 @@ class VisualisationPlugin:
     needle_length = 100
     display_surface = None
     plugin_object = None
+    race_options = None
     
     gauge_center = (514, 375) # gauge center position in background image
     
@@ -24,6 +25,7 @@ class VisualisationPlugin:
         print "start in plugin"
         print "race options sent to plugin:"
         print race_options
+        self.race_options = race_options
         self.render()
 
     def spinCount(self, count, roller):
