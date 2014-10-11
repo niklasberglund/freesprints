@@ -23,6 +23,7 @@ class Options(object):
     
     def __init__(self):
         self._roller_controller = hardware.RollerController()
+        self.distance = 300 # default distance
     
     def set_distance(self, distance):
         self.distance = distance
