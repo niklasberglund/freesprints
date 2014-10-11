@@ -60,6 +60,7 @@ class Participant(object):
     distance = 0
     
     def __init__(self, name, roller_pin, color = Color("pink")):
+        self.color = color
         self.roller = hardware.Roller(roller_pin)
     
     def set_distance(self, new_distance):
