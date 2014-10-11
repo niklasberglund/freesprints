@@ -122,6 +122,8 @@ class Application(object):
         self.race_object = race.Race(race_options, race_participants)
         
         plugins = self.plugin_loader.getAvailablePlugins()
+        
+        self.race_object.start()
         plugins[0].start(self.race_object)
 
     def show_options(self):
