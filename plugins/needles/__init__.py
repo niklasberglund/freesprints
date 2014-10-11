@@ -13,6 +13,8 @@ class VisualisationPlugin:
     race_object = None
     
     needle_length = 140
+    participant_info_box_width = 180
+    participant_info_box_height = 90
     
     background_image = None
     
@@ -109,6 +111,8 @@ class VisualisationPlugin:
         
         self.update_time_display()
         
+        self.update_boxes()
+        
         pygame.display.update()
 
     def clear_gauge(self):
@@ -139,5 +143,23 @@ class VisualisationPlugin:
         text_rect = text.get_rect()
         text_rect.centerx = self.time_display_rect.centerx
         text_rect.centery = self.time_display_rect.centery
-        
         self.display_surface.blit(text, text_rect)
+
+    def update_boxes(self):
+        self.render_participant_info_box(self.race_object.participants[0], (800, 20))
+        self.render_participant_info_box(self.race_object.participants[1], (800, 150))
+
+    def render_participant_info_box(self, participant, position):
+        box_rect = pygame.Rect(position[0], position[1], self.participant_info_box_width, self.participant_info_box_height)
+        self.display_surface.fill(participant.color, box_rect)
+        
+        font_path = "./fonts/Cave-Story.ttf"
+        distance_font = pygame.font.Font(font_path, 68)
+        distance_string = str(participant.distance)
+        text = distance_font.render(distance_string, True, Color("white"), None)
+        text_rect = text.get_rect()
+        text_rect.centerx = box_rect.centerx
+        text_rect.centery = box_rect.centery
+        self.display_surface.blit(text, text_rect)
+
+
