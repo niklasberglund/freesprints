@@ -1,23 +1,30 @@
 from pygame.locals import *
 import helpers
 import hardware
+import timeit
 
 class Race(object):
     options = None
     participants = None
+    start_time = None
     
     def __init__(self, options_object, participants_list = None):
         self.options = options_object
         self.participants = participants_list
 
     def start(self):
-        pass
+        self.start_time = timeit.default_timer()
         
     def render(self):
         pass
     
     def set_participants(self, participants_list):
         self.participants = participants_list
+
+    def elapsed_time(self):
+        print self.start_time
+        print timeit.default_timer()
+        return timeit.default_timer() - self.start_time
 
 
 class Options(object):
