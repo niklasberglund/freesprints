@@ -124,7 +124,7 @@ class VisualisationPlugin:
         time_font = pygame.font.Font(font_path, 68)
 
         # set up the text
-        time_string = '{0:.2f}'.format(round(self.race_object.elapsed_time(), 2))
+        time_string = '{0:.2f}'.format(self.race_object.elapsed_time())
         print time_string
         text = time_font.render(time_string, True, Color("white"), None)
         text_rect = text.get_rect()
