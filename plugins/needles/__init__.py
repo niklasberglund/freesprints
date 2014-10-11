@@ -22,8 +22,6 @@ class VisualisationPlugin:
     gauge_rect = pygame.Rect(330, 200, 360, 350)
     time_display_rect = pygame.Rect(10, 10, 180, 80)
     
-    start_time = None
-    
     application = None
     
     def __init__(self, application_object, plugin_object):
