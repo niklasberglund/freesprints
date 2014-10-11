@@ -22,7 +22,7 @@ class Options(object):
     _roller_controller = None
     
     def __init__(self):
-        _roller_controller = hardware.RollerController()
+        self._roller_controller = hardware.RollerController()
     
     def set_distance(self, distance):
         self.distance = distance
