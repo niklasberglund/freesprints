@@ -142,7 +142,7 @@ class VisualisationPlugin:
         
         font_path = "./fonts/Cave-Story.ttf"
         distance_font = pygame.font.Font(font_path, 68)
-        distance_string = str(participant.distance)
+        distance_string = str('{0:.2f}'.format(participant.distance))
         text = distance_font.render(distance_string, True, Color("white"), None)
         text_rect = text.get_rect()
         text_rect.centerx = box_rect.centerx
