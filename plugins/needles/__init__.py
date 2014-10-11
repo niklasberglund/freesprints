@@ -112,13 +112,13 @@ class VisualisationPlugin:
         line1_angle = (self.race_object.participants[0].distance / self.race_object.options.distance) * 360
         line1_x2 = self.gauge_center[0] + math.cos(math.radians(line1_angle - 90)) * self.needle_length
         line1_y2 = self.gauge_center[1] + math.sin(math.radians(line1_angle - 90)) * self.needle_length
-        pygame.draw.line(self.display_surface, Color("red"), self.gauge_center, (line1_x2, line1_y2), 1)
+        pygame.draw.line(self.display_surface, self.race_object.participants[0].color, self.gauge_center, (line1_x2, line1_y2), 1)
         
         line2_angle = (self.race_object.participants[1].distance / self.race_object.options.distance) * 360
         line2_angle_radians = line2_angle * (180 / math.pi)
         line2_x2 = self.gauge_center[0] + math.cos(math.radians(line2_angle - 90)) * self.needle_length
         line2_y2 = self.gauge_center[1] + math.sin(math.radians(line2_angle - 90)) * self.needle_length
-        pygame.draw.line(self.display_surface, Color("blue"), self.gauge_center, (line2_x2, line2_y2), 1)
+        pygame.draw.line(self.display_surface, self.race_object.participants[1].color, self.gauge_center, (line2_x2, line2_y2), 1)
 
     def update_time_display(self):
         self.display_surface.fill(Color("black"), self.time_display_rect)
