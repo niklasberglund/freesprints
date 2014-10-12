@@ -23,7 +23,8 @@ class VisualisationPlugin:
     
     gauge_center = (514, 375) # gauge center position in background image
     gauge_rect = pygame.Rect(330, 200, 360, 350)
-    time_display_rect = pygame.Rect(10, 10, 180, 80)
+    time_icon_rect = pygame.Rect(10, 10, 80, 80)
+    time_display_rect = pygame.Rect(90, 10, 180, 80)
     
     application = None
     
@@ -88,6 +89,8 @@ class VisualisationPlugin:
         backgroundRect.y = 0
         self.display_surface.blit(self.background_image, backgroundRect)
         
+        self.render_time_icon()
+        
         #needle_image_path = os.path.join(self.plugin_object.path, "images/needle.png")
         #needle = pygame.image.load(needle_image_path).convert()
         #needleRect = needle.get_rect()
@@ -96,6 +99,16 @@ class VisualisationPlugin:
         #self.display_surface.blit(needle, needleRect)
         
         pygame.display.update()
+
+    def render_time_icon(self):
+        self.display_surface.fill(Color("black"), self.time_icon_rect)
+        
+        time_icon_path = os.path.join(self.plugin_object.path, "images/stopwatch.png")
+        time_icon = pygame.image.load(time_icon_path).convert()
+        time_icon_image_rect = time_icon.get_rect()
+        time_icon_image_rect.centerx = self.time_icon_rect.centerx
+        time_icon_image_rect.centery = self.time_icon_rect.centery
+        self.display_surface.blit(time_icon, time_icon_image_rect)
     
     def update(self):
         self.clear_gauge()
