@@ -24,7 +24,7 @@ class VisualisationPlugin:
     gauge_center = (514, 375) # gauge center position in background image
     gauge_rect = pygame.Rect(330, 200, 360, 350)
     time_icon_rect = pygame.Rect(10, 10, 80, 80)
-    time_display_rect = pygame.Rect(90, 10, 180, 80)
+    time_display_rect = pygame.Rect(90, 10, 194, 80)
     
     application = None
     
@@ -35,8 +35,9 @@ class VisualisationPlugin:
         self.display_surface = self.application.get_window_surface()
         
         font_path = "./fonts/Cave-Story.ttf"
-        self.font_big = pygame.font.Font(font_path, 68)
-        self.font_distance = pygame.font.Font(font_path, 50)
+        distance_font_path = "./fonts/Warenhaus-Standard.ttf"
+        self.font_big = pygame.font.Font(distance_font_path, 68)
+        self.font_distance = pygame.font.Font(distance_font_path, 50)
 
     def start(self, race_object):
         print "start in plugin"
