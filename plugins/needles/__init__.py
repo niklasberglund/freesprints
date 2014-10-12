@@ -13,7 +13,7 @@ class VisualisationPlugin:
     race_object = None
     
     needle_length = 140
-    participant_info_box_width = 180
+    participant_info_box_width = 194
     participant_info_box_height = 90
     
     background_image = None
@@ -154,7 +154,11 @@ class VisualisationPlugin:
 
     def render_participant_info_box(self, participant, position):
         box_rect = pygame.Rect(position[0], position[1], self.participant_info_box_width, self.participant_info_box_height)
-        self.display_surface.fill(participant.color, box_rect)
+        self.display_surface.fill(Color("black"), box_rect)
+        
+        color_box_width = 20
+        color_box_rect = pygame.Rect(position[0] - color_box_width, position[1], color_box_width, self.participant_info_box_height)
+        self.display_surface.fill(participant.color, color_box_rect)
         
         distance_string = str('{0:.2f}'.format(participant.distance)) + 'm'
         text = self.font_distance.render(distance_string, True, Color("white"), None)
