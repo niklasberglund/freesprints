@@ -19,6 +19,7 @@ class VisualisationPlugin:
     background_image = None
     
     font_big = None
+    font_distance = None
     
     gauge_center = (514, 375) # gauge center position in background image
     gauge_rect = pygame.Rect(330, 200, 360, 350)
@@ -34,6 +35,7 @@ class VisualisationPlugin:
         
         font_path = "./fonts/Cave-Story.ttf"
         self.font_big = pygame.font.Font(font_path, 68)
+        self.font_distance = pygame.font.Font(font_path, 50)
 
     def start(self, race_object):
         print "start in plugin"
@@ -140,8 +142,8 @@ class VisualisationPlugin:
         box_rect = pygame.Rect(position[0], position[1], self.participant_info_box_width, self.participant_info_box_height)
         self.display_surface.fill(participant.color, box_rect)
         
-        distance_string = str('{0:.2f}'.format(participant.distance))
-        text = self.font_big.render(distance_string, True, Color("white"), None)
+        distance_string = str('{0:.2f}'.format(participant.distance)) + 'm'
+        text = self.font_distance.render(distance_string, True, Color("white"), None)
         text_rect = text.get_rect()
         text_rect.centerx = box_rect.centerx
         text_rect.centery = box_rect.centery
