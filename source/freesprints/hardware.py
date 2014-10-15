@@ -33,6 +33,10 @@ class Roller(object):
         
     def event_callback(self, channel):
         print "CALLBACK"
+        increase_spin_count()
+
+    def increase_spin_count(self):
+        self.spin_count = self.spin_count + 1
 
 
 
