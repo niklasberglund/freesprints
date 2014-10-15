@@ -57,16 +57,14 @@ class Participant(object):
     roller = None
     name = None
     color = None
-    distance = 0
     
     def __init__(self, name, roller_pin, color = Color("pink")):
         self.color = color
         
         self.roller = hardware.get_roller_controller().get_roller_for_pin(roller_pin)
     
-    def set_distance(self, new_distance):
-        self.distance = new_distance
-    
-    def increase_distance(self, increment):
-        self.distance = self.distance + increment
+    def increase_distance(self):
+        self.roller.increase_spin_count()
 
+    def get_distance(self):
+        return float((self.roller.spin_count * self.roller.diameter) / 1000)
