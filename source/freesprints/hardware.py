@@ -21,6 +21,7 @@ class Roller(object):
     number = None
     spin_count = 0
     spin_callback = None
+    diameter = 300
     
     def __init__(self, pin):
         self.pin = pin
