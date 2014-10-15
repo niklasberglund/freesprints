@@ -8,6 +8,14 @@ else: # running on computer
     import FakeRPiGPIO.GPIO as GPIO
     print "freesprints.hardware using FakeRpiGPIO.GPIO"
 
+roller_controller = None
+
+def get_roller_controller():
+    global roller_controller
+    
+    if roller_controller == None:
+        roller_controller = RollerController()
+
 class Roller(object):
     pin = None # board number
     number = None
@@ -24,8 +32,6 @@ class Roller(object):
         
     def event_callback(self, channel):
         print "CALLBACK"
-    
-    
 
 
 

@@ -124,7 +124,7 @@ class VisualisationPlugin:
     def clear_gauge(self):
         self.display_surface.blit(self.background_image, (self.gauge_rect[0], self.gauge_rect[1]), self.gauge_rect)
 
-    def update_gauge(self):        
+    def update_gauge(self):
         line1_angle = (self.race_object.participants[0].distance / self.race_object.options.distance) * 360
         line1_x2 = self.gauge_center[0] + math.cos(math.radians(line1_angle - 90)) * self.needle_length
         line1_y2 = self.gauge_center[1] + math.sin(math.radians(line1_angle - 90)) * self.needle_length
