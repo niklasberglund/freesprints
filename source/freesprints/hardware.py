@@ -15,6 +15,9 @@ def get_roller_controller():
     
     if roller_controller == None:
         roller_controller = RollerController()
+    
+    return roller_controller
+
 
 class Roller(object):
     pin = None # board number
