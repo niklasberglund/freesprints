@@ -49,5 +49,5 @@ class RollerController(object):
     def get_rollers(self):
         return rollers
         
-    def get_roller_for_pin(pin_number):
+    def get_roller_for_pin(self, pin_number):
         return Roller(pin_number)
