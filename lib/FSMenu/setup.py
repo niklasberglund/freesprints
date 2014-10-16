@@ -10,4 +10,3 @@ setup (
     version = '1.0.1',
     py_modules	= ['fs_menu']
     )
-

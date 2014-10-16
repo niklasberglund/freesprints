@@ -2,7 +2,7 @@ import pygame, sys
 import pygame.font
 from pygame.locals import *
 import logging
-import FSMenu
+import fs_menu
 import helpers as helpers
 import plugins
 import os.path
@@ -101,8 +101,8 @@ class Application(object):
         pygame.display.init()
         self.window_surface = pygame.display.set_mode(defaults.RESOLUTION, 0, 32)
 
-        menu_options = FSMenu.MenuOptions(menu_options_dict)
-        self.menu = FSMenu.Menu(self.window_surface, menu_structure, menu_options)
+        menu_options = fs_menu.MenuOptions(menu_options_dict)
+        self.menu = fs_menu.Menu(self.window_surface, menu_structure, menu_options)
         
         self.roller_controller = hardware.RollerController()
 
