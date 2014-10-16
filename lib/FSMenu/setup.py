@@ -7,10 +7,7 @@ setup (
     description = "Menu module for use with Pygame",
     author = "Niklas Berglund",
     author_email = "niklas.berglund@gmail.com",
-    version = '1.0.0',
-    packages = [
-        'FSMenu',
-        'FakeRPiGPIO'
-        ]      
+    version = '1.0.1',
+    py_modules	= ['fs_menu']
     )
 
