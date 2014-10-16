@@ -21,7 +21,7 @@ if helpers.is_running_on_rpi():# running on Raspberry Pi
     #os.environ["SDL_FBDEV"] = "/dev/fb1"
     print "SET DRIVER"
 else: # running on computer
-    import FakeRPiGPIO.GPIO
+    import FakeRPi.GPIO
 
 
 class Application(object):
