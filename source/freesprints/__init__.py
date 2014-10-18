@@ -9,6 +9,8 @@ import os.path
 import race
 import hardware
 import defaults
+import logging
+from rainbow_logging_handler import RainbowLoggingHandler
 
 DISPLAY_RESOLUTION = (1024, 768)
 
@@ -239,6 +241,7 @@ class Application(object):
 
 
 app = None
+logger = None
 
 def get_app():
     global app
@@ -247,6 +250,20 @@ def get_app():
     
     return app
 
+def get_logger():
+    global logger
+    
+    if logger == None:
+        logger = logging.getLogger('freesprints')
+        logger.setLevel(logging.DEBUG)
+        formatter = logging.Formatter("[%(asctime)s] %(name)s %(funcName)s():%(lineno)d\t%(message)s")  # same as default
+        
+        # setup colored logging
+        handler = RainbowLoggingHandler(sys.stderr, color_funcName=('black', 'yellow', True))
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+    
+    return logger
 
 def init():
     global app
