@@ -22,8 +22,6 @@ class Race(object):
         self.participants = participants_list
 
     def elapsed_time(self):
-        print self.start_time
-        print timeit.default_timer()
         return timeit.default_timer() - self.start_time
 
 
