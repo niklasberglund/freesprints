@@ -3,9 +3,13 @@ import pygame
 from pygame.locals import *
 import os.path
 import sys
+import logging
+from rainbow_logging_handler import RainbowLoggingHandler
 
 
 class VisualisationPlugin:
+    logger = None
+    
     meter_center = (200, 200)
     needle_length = 100
     display_surface = None
@@ -29,7 +33,17 @@ class VisualisationPlugin:
     application = None
     
     def __init__(self, application_object, plugin_object):
-        print "init in plugin"
+        # setup logger
+        self.logger = logging.getLogger('Needles')
+        self.logger.setLevel(logging.DEBUG)
+        formatter = logging.Formatter("[%(asctime)s] %(name)s %(funcName)s():%(lineno)d\t%(message)s")  # same as default
+        
+        # setup colored logging
+        handler = RainbowLoggingHandler(sys.stderr, color_funcName=('black', 'yellow', True))
+        handler.setFormatter(formatter)
+        self.logger.addHandler(handler)
+        
+        self.logger.debug("init in Needles plugin")
         self.application = application_object
         self.plugin_object = plugin_object
         self.display_surface = self.application.get_window_surface()
@@ -40,9 +54,9 @@ class VisualisationPlugin:
         self.font_distance = pygame.font.Font(distance_font_path, 50)
 
     def start(self, race_object):
-        print "start in plugin"
-        print "race object sent to plugin:"
-        print race_object
+        self.logger.debug("start in Needles plugin")
+        self.logger.debug("race object sent to plugin:")
+        self.logger.debug(race_object)
         
         self.race_object = race_object
         self.render()
@@ -60,13 +74,13 @@ class VisualisationPlugin:
                       if (self.race_object):
                           participant = self.race_object.participants[0]
                           participant.increase_distance()
-                          print self.race_object.participants[0].get_distance()
+                          self.logger.debug(self.race_object.participants[0].get_distance())
                           #print self.race_object.elapsed_time()
                   elif event.key == pygame.locals.K_s:
                       if (self.race_object):
                           participant = self.race_object.participants[1]
                           participant.increase_distance()
-                          print self.race_object.participants[1].get_distance()
+                          self.logger.debug(self.race_object.participants[1].get_distance())
                           #print self.race_object.elapsed_time()
         
           # Clear the screen
@@ -75,7 +89,7 @@ class VisualisationPlugin:
           self.update()
 
     def spinCount(self, count, roller):
-        print "spinCount in plugin"
+        self.logger.debug("spinCount in plugin")
 
     def render(self):
         # Resolution
@@ -129,14 +143,14 @@ class VisualisationPlugin:
         line1_x2 = self.gauge_center[0] + math.cos(math.radians(line1_angle - 90)) * self.needle_length
         line1_y2 = self.gauge_center[1] + math.sin(math.radians(line1_angle - 90)) * self.needle_length
         pygame.draw.line(self.display_surface, self.race_object.participants[0].color, self.gauge_center, (line1_x2, line1_y2), 1)
-        print "line1: " + str(self.race_object.participants[0].get_distance())
+        self.logger.debug("line1: " + str(self.race_object.participants[0].get_distance()))
         
         line2_angle = (self.race_object.participants[1].get_distance() / self.race_object.options.distance) * 360
         line2_angle_radians = line2_angle * (180 / math.pi)
         line2_x2 = self.gauge_center[0] + math.cos(math.radians(line2_angle - 90)) * self.needle_length
         line2_y2 = self.gauge_center[1] + math.sin(math.radians(line2_angle - 90)) * self.needle_length
         pygame.draw.line(self.display_surface, self.race_object.participants[1].color, self.gauge_center, (line2_x2, line2_y2), 1)
-        print "line2: " + str(self.race_object.participants[1].get_distance())
+        self.logger.debug("line2: " + str(self.race_object.participants[1].get_distance()))
 
     def update_time_display(self):
         self.display_surface.fill(Color("black"), self.time_display_rect)
