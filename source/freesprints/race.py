@@ -65,4 +65,4 @@ class Participant(object):
         self.roller.increase_spin_count()
 
     def get_distance(self):
-        return float((self.roller.spin_count * self.roller.diameter) / 1000)
+        return float(float(self.roller.spin_count * self.roller.diameter) / 1000)
