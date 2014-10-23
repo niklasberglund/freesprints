@@ -25,6 +25,8 @@ SPI = 41
 I2C = 42
 PWM = 43
 
+event_detect_mapping = {}
+
     
 def setmode(mode):
     pass
@@ -42,7 +44,9 @@ def wait_for_edge(number, edge):
     pass
 
 def add_event_detect(number, risingFalling, callback):
-    pass
+    global event_detect_mapping
+    
+    event_detect_mapping[number] = callback
 
 def cleanup():
     pass
