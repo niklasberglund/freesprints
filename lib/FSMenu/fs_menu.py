@@ -206,6 +206,8 @@ class Menu:
 
 
 class MenuItem(object):
+    menu_options = None
+    
     title = None
     callback = None
     submenuDict = None
@@ -224,6 +226,8 @@ class MenuItem(object):
     def __init__(self, dict, menuOptions, itemParent = None):
         print "dict:"
         print dict
+        self.menu_options = menuOptions
+        
         self.title = dict['title']
         self.parent = itemParent
         self.font = menuOptions.getItemFont()
