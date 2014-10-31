@@ -270,8 +270,8 @@ class MenuItem(object):
     def getText(self):
         if self.text == None:
             title_string = self.title if self.input_value == None else self.title + ":"
-            item_text = self.font.render(title_string, True, Menu.colorWhite, None)
-            item_value = self.font.render(self.input_value, True, Menu.colorGreen, None)
+            item_text = self.font.render(title_string, True, Menu.colorWhite, self.menu_options.get_color_background())
+            item_value = self.font.render(self.input_value, True, Menu.colorGreen, self.menu_options.get_color_background())
             item_text_rect = item_text.get_rect()
             item_value_rect = item_value.get_rect()
             width = item_text_rect.width + item_value_rect.width
@@ -294,8 +294,8 @@ class MenuItem(object):
     def getHighlightedText(self):
         if self.highlightedText == None:
             title_string = self.title if self.input_value == None else self.title + ":"
-            item_text = self.font.render(title_string, True, Menu.colorRed, None)
-            item_value = self.font.render(self.input_value, True, Menu.colorGreen, None)
+            item_text = self.font.render(title_string, True, Menu.colorRed, self.menu_options.get_color_background())
+            item_value = self.font.render(self.input_value, True, Menu.colorGreen, self.menu_options.get_color_background())
             item_text_rect = item_text.get_rect()
             item_value_rect = item_value.get_rect()
             width = item_text_rect.width + item_value_rect.width
@@ -364,3 +364,6 @@ class MenuOptions(object):
 
     def getValueFont(self):
         return self.valueFont
+
+    def get_color_background(self):
+        return self.color_background
