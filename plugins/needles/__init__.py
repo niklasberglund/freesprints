@@ -158,7 +158,7 @@ class VisualisationPlugin:
         # set up the text
         time_string = '{0:.2f}'.format(self.race_object.elapsed_time())
         #print time_string
-        text = self.font_big.render(time_string, True, Color("white"), None)
+        text = self.font_big.render(time_string, True, Color("white"), Color("black"))
         text_rect = text.get_rect()
         text_rect.centerx = self.time_display_rect.centerx
         text_rect.centery = self.time_display_rect.centery
@@ -177,7 +177,7 @@ class VisualisationPlugin:
         self.display_surface.fill(participant.color, color_box_rect)
         
         distance_string = str('{0:.2f}'.format(participant.get_distance())) + 'm'
-        text = self.font_distance.render(distance_string, True, Color("white"), None)
+        text = self.font_distance.render(distance_string, True, Color("white"), Color("black"))
         text_rect = text.get_rect()
         text_rect.centerx = box_rect.centerx
         text_rect.centery = box_rect.centery
