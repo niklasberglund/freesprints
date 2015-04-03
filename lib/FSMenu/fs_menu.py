@@ -25,8 +25,11 @@ class Menu:
     colorGreen = (0, 255, 0)
     colorBlue = (0, 0, 255)
     
+    menuOptions = None
+    
     def __init__(self, displaySurface, menuStructure, menuOptions = None):
         self.displaySurface = displaySurface
+        self.menuOptions = menuOptions
 
         if menuOptions == None:
             menuOptions = MenuOptions() # with default values
