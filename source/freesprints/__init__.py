@@ -139,18 +139,18 @@ class Application(object):
         pluginIndex = 0
         
         for plugin in self.plugin_loader.getAvailablePlugins():
-            print "plugin: " + plugin.name
             submenu.append({
                 "title": plugin.name,
-                "callback": self.select_plugin
+                "callback": self.select_plugin,
+                "tag": pluginIndex
             })
-        
-        pluginIndex = pluginIndex + 1
+            
+            pluginIndex = pluginIndex + 1
         
         return submenu
 
-    def select_plugin(self, plugin):
-        pass
+    def select_plugin(self, pluginIndex):
+        print "selected plugin with index " + str(pluginIndex)
 
     def exit(self):
         pygame.quit()

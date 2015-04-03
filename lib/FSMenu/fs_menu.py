@@ -94,7 +94,10 @@ class Menu:
                 self.current_index = 0
                 self.render()
             else:
-                selectedItem.execute()
+                if (selectedItem.tag != None): # pass tag or not?
+                    selectedItem.execute(selectedItem.tag)
+                else:
+                    selectedItem.execute()
 
     def render(self):
         start_time = timeit.default_timer()
@@ -220,6 +223,7 @@ class MenuItem(object):
     callback = None
     submenuDict = None
     submenu = None
+    tag = None
     parent = None
     
     font = None
@@ -242,6 +246,7 @@ class MenuItem(object):
         
         self.callback = dict.get("callback")
         self.submenuPopulatorCallback = dict.get("submenu_populator_callback")
+        self.tag = dict.get("tag")
         
         input = dict.get("input")
         if input != None:
@@ -261,8 +266,8 @@ class MenuItem(object):
     def registerKeypress(self, key):
         pass
         
-    def execute(self):
-        self.callback()
+    def execute(self, *args, **kwargs):
+        self.callback(*args)
         
     def hasSubmenu(self):
         if self.submenu != None:
