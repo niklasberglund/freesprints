@@ -83,7 +83,12 @@ class Menu:
             
             print selectedItem
             
-            if selectedItem.hasSubmenu():
+            if selectedItem.hasSubmenuPopulator():
+                self.clear()
+                self.current_items = selectedItem.populateSubmenu()
+                self.current_index = 0
+                self.render()
+            elif selectedItem.hasSubmenu():
                 self.clear()
                 self.current_items = selectedItem.getSubmenu()
                 self.current_index = 0
@@ -236,6 +241,7 @@ class MenuItem(object):
         self.font = menuOptions.getItemFont()
         
         self.callback = dict.get("callback")
+        self.submenuPopulatorCallback = dict.get("submenu_populator_callback")
         
         input = dict.get("input")
         if input != None:
@@ -263,7 +269,17 @@ class MenuItem(object):
             return True
         else:
             return False
-            
+    
+    def hasSubmenuPopulator(self):
+        if self.submenuPopulatorCallback != None:
+            return True
+        else:
+            return False
+    
+    def populateSubmenu(self):
+        submenuItems = MenuItem.itemsListFromDict(self.submenuPopulatorCallback(), self.menu_options)
+        return submenuItems
+    
     def getSubmenu(self):
         return self.submenu
         
