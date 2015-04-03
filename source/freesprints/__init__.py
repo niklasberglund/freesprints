@@ -69,6 +69,7 @@ class Application(object):
                     {
                         "title": "Race visualizer",
                         "callback": None,
+                        "submenu_populator_callback": self.populate_visualizers,
                         "identifier": "race_visualizer_selection"
                     },
                     {
@@ -130,6 +131,26 @@ class Application(object):
 
     def show_options(self):
         print "show options"
+
+    def populate_visualizers(self):
+        print "populate_visualizers"
+        
+        submenu = []
+        pluginIndex = 0
+        
+        for plugin in self.plugin_loader.getAvailablePlugins():
+            print "plugin: " + plugin.name
+            submenu.append({
+                "title": plugin.name,
+                "callback": self.select_plugin
+            })
+        
+        pluginIndex = pluginIndex + 1
+        
+        return submenu
+
+    def select_plugin(self, plugin):
+        pass
 
     def exit(self):
         pygame.quit()
