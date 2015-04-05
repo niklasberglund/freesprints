@@ -282,7 +282,7 @@ class MenuItem(object):
             return False
     
     def populateSubmenu(self):
-        submenuItems = MenuItem.itemsListFromDict(self.submenuPopulatorCallback(), self.menu_options)
+        submenuItems = MenuItem.itemsListFromDict(self.submenuPopulatorCallback(), self.menu_options, self)
         return submenuItems
     
     def getSubmenu(self):
