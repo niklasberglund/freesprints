@@ -152,7 +152,7 @@ class Application(object):
 
     def select_plugin(self, plugin_index):
         print "selected plugin with index " + str(plugin_index)
-        selected_plugin_index = plugin_index
+        self.selected_plugin_index = plugin_index
 
     def exit(self):
         pygame.quit()
