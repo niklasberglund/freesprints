@@ -55,14 +55,7 @@ class Menu:
         print "registered key " + str(key)
         
         if key == pygame.locals.K_ESCAPE: # ESC
-            if self.getParentMenu() != None:
-                self.clear()
-                self.current_items = self.getSiblingsOfItem(self.getParentMenu())
-                self.current_index = 0
-                self.render()
-            else:
-                pygame.quit()
-                sys.exit()
+            self.goBack()
         elif key == pygame.locals.K_q:
             pygame.quit()
             sys.exit()
@@ -195,6 +188,16 @@ class Menu:
             
         print "current_index:" + str(self.current_index)
         print self.current_items
+    
+    def goBack(self):
+        if self.getParentMenu() != None:
+            self.clear()
+            self.current_items = self.getSiblingsOfItem(self.getParentMenu())
+            self.current_index = 0
+            self.render()
+        else:
+            pygame.quit()
+            sys.exit()
     
     def getCurrentMenuItems(self):
         pass
