@@ -43,6 +43,7 @@ class Application(object):
     roller_controller = None
     race_options = None
     race_object = None
+    selected_plugin_index = 0 # 0 by default. this should ideally be restored from stored settings
 
     def __init__(self):
         print "Application.__init__"
@@ -127,7 +128,7 @@ class Application(object):
         plugins = self.plugin_loader.getAvailablePlugins()
         
         self.race_object.start()
-        plugins[0].start(self.race_object)
+        plugins[self.selected_plugin_index].start(self.race_object)
 
     def show_options(self):
         print "show options"
@@ -149,8 +150,9 @@ class Application(object):
         
         return submenu
 
-    def select_plugin(self, pluginIndex):
-        print "selected plugin with index " + str(pluginIndex)
+    def select_plugin(self, plugin_index):
+        print "selected plugin with index " + str(plugin_index)
+        selected_plugin_index = plugin_index
 
     def exit(self):
         pygame.quit()
