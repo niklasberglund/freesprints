@@ -91,6 +91,8 @@ class Menu:
                     selectedItem.execute(selectedItem.tag)
                 else:
                     selectedItem.execute()
+                
+                self.goBack()
 
     def render(self):
         start_time = timeit.default_timer()
