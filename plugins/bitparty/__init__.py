@@ -17,10 +17,10 @@ class VisualisationPlugin:
     race_object = None
     
     needle_length = 140
-    participant_info_box_width = 194
+    participant_info_box_width = 340
     participant_info_box_height = 90
-    
-    background_image = None
+    participant_info_box_color = (242, 243, 242)
+    participant_info_box_x = 670
     
     font_big = None
     font_distance = None
@@ -34,7 +34,7 @@ class VisualisationPlugin:
     
     def __init__(self, application_object, plugin_object):
         # setup logger
-        self.logger = logging.getLogger('Needles')
+        self.logger = logging.getLogger('Bitparty')
         self.logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter("[%(asctime)s] %(name)s %(funcName)s():%(lineno)d\t%(message)s")  # same as default
         
@@ -43,18 +43,18 @@ class VisualisationPlugin:
         handler.setFormatter(formatter)
         self.logger.addHandler(handler)
         
-        self.logger.debug("init in Needles plugin")
+        self.logger.debug("init in Bitparty plugin")
         self.application = application_object
         self.plugin_object = plugin_object
         self.display_surface = self.application.get_window_surface()
         
         font_path = "./fonts/Cave-Story.ttf"
-        distance_font_path = "./fonts/Warenhaus-Standard.ttf"
+        distance_font_path = "./fonts/PressStart2P.ttf"
         self.font_big = pygame.font.Font(distance_font_path, 68)
         self.font_distance = pygame.font.Font(distance_font_path, 50)
 
     def start(self, race_object):
-        self.logger.debug("start in Needles plugin")
+        self.logger.debug("start in Bitparty plugin")
         self.logger.debug("race object sent to plugin:")
         self.logger.debug(race_object)
         
@@ -97,13 +97,6 @@ class VisualisationPlugin:
         display_width = display_info.current_w
         display_height = display_info.current_h
         
-        background_image_path = os.path.join(self.plugin_object.path, "images/background-wood3-1024x768.png")
-        self.background_image = pygame.image.load(background_image_path).convert()
-        backgroundRect = self.background_image.get_rect()
-        backgroundRect.x = 0
-        backgroundRect.y = 0
-        self.display_surface.blit(self.background_image, backgroundRect)
-        
         self.render_time_icon()
         
         #needle_image_path = os.path.join(self.plugin_object.path, "images/needle.png")
@@ -136,7 +129,8 @@ class VisualisationPlugin:
         pygame.display.update()
 
     def clear_gauge(self):
-        self.display_surface.blit(self.background_image, (self.gauge_rect[0], self.gauge_rect[1]), self.gauge_rect)
+        self.display_surface.fill(Color("black"))
+        #self.display_surface.fill(Color("black"), (self.gauge_rect[0], self.gauge_rect[1]), self.gauge_rect)
 
     def update_gauge(self):
         line1_angle = (self.race_object.participants[0].get_distance() / self.race_object.options.distance) * 360
@@ -165,19 +159,19 @@ class VisualisationPlugin:
         self.display_surface.blit(text, text_rect)
 
     def update_boxes(self):
-        self.render_participant_info_box(self.race_object.participants[0], (800, 20))
-        self.render_participant_info_box(self.race_object.participants[1], (800, 150))
+        self.render_participant_info_box(self.race_object.participants[0], (self.participant_info_box_x, 20))
+        self.render_participant_info_box(self.race_object.participants[1], (self.participant_info_box_x, 150))
 
     def render_participant_info_box(self, participant, position):
         box_rect = pygame.Rect(position[0], position[1], self.participant_info_box_width, self.participant_info_box_height)
-        self.display_surface.fill(Color("black"), box_rect)
+        self.display_surface.fill(self.participant_info_box_color, box_rect)
         
         color_box_width = 20
         color_box_rect = pygame.Rect(position[0] - color_box_width, position[1], color_box_width, self.participant_info_box_height)
         self.display_surface.fill(participant.color, color_box_rect)
         
         distance_string = str('{0:.2f}'.format(participant.get_distance())) + 'm'
-        text = self.font_distance.render(distance_string, True, Color("white"), Color("black"))
+        text = self.font_distance.render(distance_string, True, Color("black"), self.participant_info_box_color)
         text_rect = text.get_rect()
         text_rect.centerx = box_rect.centerx
         text_rect.centery = box_rect.centery
